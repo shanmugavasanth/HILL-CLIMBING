@@ -1,13 +1,18 @@
 <h1>ExpNo 5 : Implement Simple Hill Climbing Algorithm</h1> 
-<h3>Name:             </h3>
-<h3>Register Number:             </h3>
+
+<h3>Name: Shanmuga Vasanth M            </h3>
+
+<h3>Register Number: 212223040191            </h3>
+
 <H3>Aim:</H3>
+
 <p>Implement Simple Hill Climbing Algorithm and Generate a String by Mutating a Single Character at each iteration </p>
+
 <h2> Theory: </h2>
+
 <p>Hill climbing is a variant of Generate and test in which feedback from test procedure is used to help the generator decide which direction to move in search space.
 Feedback is provided in terms of heuristic function
 </p>
-
 
 <h2>Algorithm:</h2>
 <p>
@@ -39,23 +44,50 @@ Feedback is provided in terms of heuristic function
 <p> Lopp Step -2 and Step-3  until we achieve the score to be Zero to achieve Global Minima.</p>
 
 <hr>
-<h2>Sample Input and Output</h2>
-<h2>Sample String:</h2> Artificial Intelligence
+
+<h2> Program </h2>
+
+```
+import random
+import string
+
+def fitness(candidate, target):
+    return sum(abs(ord(candidate[i]) - ord(target[i])) for i in range(len(target)))
+
+def mutate(parent):
+    idx = random.randrange(len(parent))
+    new_char = random.choice(string.printable[:95])
+    return parent[:idx] + new_char + parent[idx + 1:]
+
+def hill_climb(target):
+    current = ''.join(random.choice(string.printable[:95]) for _ in range(len(target)))
+    current_score = fitness(current, target)
+    while True:
+        neighbor = mutate(current)
+        neighbor_score = fitness(neighbor, target)
+        if neighbor_score <= current_score:
+            current, current_score = neighbor, neighbor_score
+            print(f"Score: {current_score} Solution : {current}")
+        if current_score == 0:
+            break
+    return current
+
+target_string = "Artificial Intelligence"
+solution = hill_climb(target_string)
+print("\nFinal Solution:", solution)
+
+```
+
+<h2>Sample String:</h2>
+
+Artificial Intelligence
+
 <h2>Output:</h2>
-Score: 643  Solution :  8RzF:oG ]%;CPORRMe!zGvk<br>
-Score: 609  Solution :  8RzF:oG ]%;CPqRRMe!zGvk<br>
-Score: 604  Solution :  8RzF:oG ]%;CPqRRMe!zGqk<br>
-Score: 594  Solution :  8RzF:oG ]%;CPqRRWe!zGqk<br>
-Score: 551  Solution :  8RzF:oGK]%;CPqRRWe!zGqk<br>
-Score: 551  Solution :  8RzF:oGK]%;CPqRRWe!zGqk<br>
-Score: 551  Solution :  8RzF:oGK]%;CPqRRWe!zGqk<br>
-Score: 551  Solution :  8RzF:oGK]%;CPqRRWe!zGqk<br>
-Score: 551  Solution :  8RzF:oGK]%;CPqRRWe!zGqk<br>
-....................................................<br>
-..................................................<br>
-................................................<br>
-Score: 1  Solution :  Artificial Intelligencf<br>
-Score: 1  Solution :  Artificial Intelligencf<br>
-Score: 1  Solution :  Artificial Intelligencf<br>
-Score: 1  Solution :  Artificial Intelligencf<br>
-Score: 0  Solution :  Artificial Intelligence<br>
+
+<img width="888" height="407" alt="Screenshot 2025-09-09 204612" src="https://github.com/user-attachments/assets/c5695e99-9c85-4e11-9f7b-831de6ab167b" />
+
+<img width="855" height="461" alt="image" src="https://github.com/user-attachments/assets/69c5ac1f-cb64-41ed-a9f9-be54141c6cb3" />
+
+<h2> Result </h2>
+
+Thus the program was executed successfully.
